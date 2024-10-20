@@ -1,4 +1,16 @@
-# Virtual-Pet-App
-for software engineering 2024 fall
+# login
 
-We are group 3, our project is a virtual pet app. Our product is an educational virtual pet game that combines interactive learning with entertainment. Users care for a virtual pet, exploring important life skills such as responsibility and empathy while enjoying a fun and engaging environment. The game offers various choices and activities that not only foster knowledge about pet care but also provide a relaxing escape, making it an enjoyable experience for users of all ages.
+A new Flutter project.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
