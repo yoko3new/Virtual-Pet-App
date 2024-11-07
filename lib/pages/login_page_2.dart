@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login/components/my_button.dart';
 import 'package:login/components/my_textfield.dart';
-import 'package:login/components/square_tile.dart';
 
 class LoginPage2 extends StatelessWidget {
   LoginPage2({super.key});
@@ -13,7 +11,7 @@ class LoginPage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[100],
+      backgroundColor: Colors.brown[100],
       body: SafeArea(
         child: Center(
           child: Column(
@@ -31,7 +29,7 @@ class LoginPage2 extends StatelessWidget {
 // username textfield
               MyTextField(
                 controller: usernameController,
-                hintText: 'username',
+                hintText: 'Username',
                 obscureText: false,
               ),
 
@@ -40,7 +38,7 @@ class LoginPage2 extends StatelessWidget {
               // password textfield
               MyTextField(
                 controller: passwordController,
-                hintText: 'password',
+                hintText: 'Password',
                 obscureText: true,
               ),
 
