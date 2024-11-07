@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login/components/my_button.dart';
 import 'package:login/components/my_textfield.dart';
-import 'package:login/components/square_tile.dart';
 
 class RegistrationPage extends StatelessWidget {
   RegistrationPage({super.key});
@@ -21,7 +19,7 @@ class RegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[100],
+      backgroundColor: Colors.brown[100],
       body: SafeArea(
         child: Center(
           child: Column(
@@ -96,8 +94,6 @@ class RegistrationPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 15),
-
-
 
 
 
