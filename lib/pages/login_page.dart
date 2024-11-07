@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:login/components/my_button.dart';
 import 'package:login/components/my_textfield.dart';
 import 'package:login/components/square_tile.dart';
+//import './api_service.dart';
+import 'dart:convert';
+
+/*
+Steph: I mainly change code from here to connect our backend and frontend
+because of this only the login1 page of the frontend connects to our backend
+
+*/
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -10,13 +17,44 @@ class LoginPage extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
+  // needed for api
+ // final ApiService apiService = ApiService();
+
+
+
   // sign user in method
-  void signUserIn() {}
+  void signUserIn(BuildContext context) async {
+    print('signUserIn called'); //this will print signUserIn called in the debug menu to test if the frontend flutter side works
+    String username = usernameController.text;
+    String password = passwordController.text;
+
+    // api for username and password
+    /*final response = await apiService.login(username, password);
+
+     error messages
+    if (response != null) {
+      print('Login successful: ${jsonEncode(response)}');
+
+      Navigator.pushNamed(context, '/petdashboard');
+    } else {
+
+      print('Login failed.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login failed. Please check your credentials.')),
+      );
+    }
+
+     */
+  }
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[100],
+      backgroundColor: Colors.brown[100],
       body: SafeArea(
         child: Center(
           child: Column(
@@ -30,6 +68,14 @@ class LoginPage extends StatelessWidget {
                 size: 100,
               ),
 
+              Text(
+                'PetPals',
+                style: TextStyle(
+                  color: Colors.grey[900],
+                  fontSize: 35,
+                ),
+              ),
+
               const SizedBox(height: 50),
 
               // welcome back, you've been missed!
@@ -37,7 +83,7 @@ class LoginPage extends StatelessWidget {
                 'Welcome!',
                 style: TextStyle(
                   color: Colors.grey[900],
-                  fontSize: 24,
+                  fontSize: 20,
                 ),
               ),
 
@@ -46,7 +92,7 @@ class LoginPage extends StatelessWidget {
               // username textfield
               MyTextField(
                 controller: usernameController,
-                hintText: 'username',
+                hintText: 'Username',
                 obscureText: false,
               ),
 
@@ -55,7 +101,7 @@ class LoginPage extends StatelessWidget {
               // password textfield
               MyTextField(
                 controller: passwordController,
-                hintText: 'password',
+                hintText: 'Password',
                 obscureText: true,
               ),
 
@@ -80,7 +126,7 @@ class LoginPage extends StatelessWidget {
               // sign in button
               ElevatedButton(
                 child: const Text("Sign in"),
-                onPressed:(){
+                onPressed: () {
                   Navigator.pushNamed(context, '/petdashboard');
                 },
               ),
@@ -95,7 +141,7 @@ class LoginPage extends StatelessWidget {
                     Expanded(
                       child: Divider(
                         thickness: 0.5,
-                        color: Colors.grey[400],
+                        color: Colors.white,
                       ),
                     ),
                     Padding(
@@ -108,7 +154,7 @@ class LoginPage extends StatelessWidget {
                     Expanded(
                       child: Divider(
                         thickness: 0.5,
-                        color: Colors.grey[100],
+                        color: Colors.white,
                       ),
                     ),
                   ],
@@ -117,30 +163,29 @@ class LoginPage extends StatelessWidget {
 
               const SizedBox(height: 50),
 
-              // google + apple sign in buttons
-              Row(
+              // Google + Apple sign-in buttons
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  // google button
+                children: [
+                  // Google button
                   SquareTile(imagePath: 'lib/images/google.png'),
 
                   SizedBox(width: 25),
 
-                  // apple button
+                  // Apple button
                   SquareTile(imagePath: 'lib/images/apple.png')
                 ],
               ),
 
               const SizedBox(height: 50),
 
-              // not a member? register now
-         ElevatedButton(
-            child: const Text("Register now"),
-            onPressed:(){
-              Navigator.pushNamed(context, '/registrationpage');
-            },
-         ),
-
+              // Not a member? Register now
+              ElevatedButton(
+                child: const Text("Register now"),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/registrationpage');
+                },
+              ),
             ],
           ),
         ),
