@@ -66,7 +66,7 @@ class _PetDashboardState extends State<petDashboardHamster> {
         Navigator.pushNamed(context, '/pet_quizzes');
         break;
       case 3:
-        Navigator.pushNamed(context, '/login2');
+        Navigator.pushNamed(context, '/loginpage');
         break;
     }
   }
