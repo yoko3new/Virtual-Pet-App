@@ -10,38 +10,37 @@ class profilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<profilePage> {
   // User details (can be replaced with real user data from a database or API)
-  String _userName = "Jane Doe";
-  String _petName = "Fluffy";
-  String _phoneNumber = "+123 456 7890";
-  String _email = "jane.doe@email.com";
-  String _username = "janedoe123";
+  String name = "Jane Doe";
+  String petName = "Fluffy";
+  String phoneNumber = "+123 456 7890";
+  String email = "jane.doe@email.com";
+  String username = "janedoe123";
 
 
-  final TextEditingController _userNameController = TextEditingController();
-  final TextEditingController _petNameController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController petnameController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _userNameController.text = _userName;
-    _petNameController.text = _petName;
-    _phoneNumberController.text = _phoneNumber;
-    _emailController.text = _email;
-    _usernameController.text = _username;
+    nameController.text = name;
+    petnameController.text = petName;
+    phoneNumberController.text = phoneNumber;
+    emailController.text = email;
+    usernameController.text = username;
   }
 
 
-  // Function to save updated details (For now, we'll just print the values)
   void _saveProfile() {
     setState(() {
-      _userName = _userNameController.text;
-      _petName = _petNameController.text;
-      _phoneNumber = _phoneNumberController.text;
-      _email = _emailController.text;
-      _username = _usernameController.text;
+      name = nameController.text;
+      petName = petnameController.text;
+      phoneNumber = phoneNumberController.text;
+      email = emailController.text;
+      username = usernameController.text;
     });
 
     // Save this data to a backend or database here
@@ -107,7 +106,7 @@ class _ProfilePageState extends State<profilePage> {
                       // User Name
                       Text('Name:'),
                       TextField(
-                        controller: _userNameController,
+                        controller: nameController,
                         decoration: InputDecoration(
                           hintText: 'Enter your name',
                           border: OutlineInputBorder(),
@@ -119,7 +118,7 @@ class _ProfilePageState extends State<profilePage> {
                       // Pet Name
                       Text('Pet Name:'),
                       TextField(
-                        controller: _petNameController,
+                        controller: petnameController,
                         decoration: InputDecoration(
                           hintText: 'Enter your pet\'s name',
                           border: OutlineInputBorder(),
@@ -131,7 +130,7 @@ class _ProfilePageState extends State<profilePage> {
                       // Phone Number
                       Text('Phone Number:'),
                       TextField(
-                        controller: _phoneNumberController,
+                        controller: phoneNumberController,
                         decoration: InputDecoration(
                           hintText: 'Enter your phone number',
                           border: OutlineInputBorder(),
@@ -143,7 +142,7 @@ class _ProfilePageState extends State<profilePage> {
                       // Email
                       Text('Email:'),
                       TextField(
-                        controller: _emailController,
+                        controller: emailController,
                         decoration: InputDecoration(
                           hintText: 'Enter your email',
                           border: OutlineInputBorder(),
@@ -155,7 +154,7 @@ class _ProfilePageState extends State<profilePage> {
                       // Username
                       Text('Username:'),
                       TextField(
-                        controller: _usernameController,
+                        controller: usernameController,
                         decoration: InputDecoration(
                           hintText: 'Enter your username',
                           border: OutlineInputBorder(),
@@ -167,7 +166,7 @@ class _ProfilePageState extends State<profilePage> {
                       // Save button
                       ElevatedButton(
                         onPressed: () {
-                          _saveProfile();  // Save the profile first
+                          _saveProfile();
 
                           Navigator.pop(context, '/pet_dashboard');
                         },
