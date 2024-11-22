@@ -43,7 +43,7 @@ class _ProfilePageState extends State<profilePage> {
       username = usernameController.text;
     });
 
-    // Save this data to a backend or database here
+    // Save this data to a backend/database
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Profile Updated!'),

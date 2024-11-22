@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class petMilestones extends StatelessWidget {
   petMilestones({super.key});
 
@@ -8,7 +7,6 @@ class petMilestones extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Milestones'),
         backgroundColor: Colors.brown[300],
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -19,149 +17,69 @@ class petMilestones extends StatelessWidget {
       ),
       backgroundColor: Colors.brown[100],
       body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                // Title section
+                Text(
+                  'Milestones',
+                  style: TextStyle(
+                    color: Colors.grey[900],
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // First milestone
+                _buildMilestoneCard('🔔 Your pet has turned 2 years old!'),
+                const SizedBox(height: 20),
+
+                // Second milestone
+                _buildMilestoneCard('🔔 Your pet is potty trained!'),
+                const SizedBox(height: 20),
+
+                // Third milestone
+                _buildMilestoneCard('🔔 Your pet made a new friend!'),
+                const SizedBox(height: 20),
+
+                // Fourth milestone
+                _buildMilestoneCard('🔔 Your pet lost their first tooth!'),
+                const SizedBox(height: 20),
+
+                // Fifth milestone
+                _buildMilestoneCard('🔔 Your pet has turned 1 year old!'),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMilestoneCard(String milestoneText) {
+    return Container(
+      height: 60,
+      width: double.infinity,
+      child: Card(
+        elevation: 20,
+        color: Colors.white,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-
-
-            children: <Widget>[
-              // First notif
-              Text(
-                'Milestones',
-                style: TextStyle(
-                  color: Colors.grey[900],
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                height: 60,
-                width: 400,
-              child: Card(
-                elevation: 20,
-                color: Colors.white,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text(
-                      '🔔 Your pet has turned 2 years old!',
-                      style: TextStyle(
-                        color: Colors.grey[900],
-                        fontSize: 24,
-                      ),
-                    ),
-                  ],
-               ),
-              ),
-              ),
-
-
-              const SizedBox(height: 20), // Space between cards
-
-              // Second notif
-              Container(
-                height: 60,
-                width: 400,
-                child: Card(
-                  elevation: 20,
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        '🔔 Your pet is potty trained!',
-                        style: TextStyle(
-                          color: Colors.grey[900],
-                          fontSize: 24,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-
-              const SizedBox(height: 20), // Space between cards
-
-              // Third notif
-              Container(
-                height: 60,
-                width: 400,
-                child: Card(
-                  elevation: 20,
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        '🔔 Your pet made a new friend!',
-                        style: TextStyle(
-                          color: Colors.grey[900],
-                          fontSize: 24,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 20), // Space between cards
-
-
-              // Fourth notif
-              Container(
-                height: 60,
-                width: 400,
-                child: Card(
-                  elevation: 20,
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        '🔔 Your pet lost their first tooth!',
-                        style: TextStyle(
-                          color: Colors.grey[900],
-                          fontSize: 24,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-
-              const SizedBox(height: 20), // Space between cards
-
-              // Fifth notif
-              Container(
-                height: 60,
-                width: 400,
-                child: Card(
-                  elevation: 20,
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        '🔔 Your pet has turned 1 year old!',
-                        style: TextStyle(
-                          color: Colors.grey[900],
-                          fontSize: 24,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-
-              ),
-
-            ],
+          child: Text(
+            milestoneText,
+            style: TextStyle(
+              color: Colors.grey[900],
+              fontSize: 20,
+            ),
           ),
         ),
       ),
     );
   }
 }
+
+

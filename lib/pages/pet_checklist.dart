@@ -5,10 +5,10 @@ class petChecklist extends StatefulWidget {
   const petChecklist({super.key});
 
   @override
-  _PetChecklistState createState() => _PetChecklistState();
+  PetChecklistState createState() => PetChecklistState();
 }
 
-class _PetChecklistState extends State<petChecklist> {
+class PetChecklistState extends State<petChecklist> {
   List<String> taskTitles = [
     'Feed your pet',
     'Groom your pet',
@@ -38,7 +38,6 @@ class _PetChecklistState extends State<petChecklist> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pet Care Checklist'),
         backgroundColor: Colors.brown[300],
       ),
       backgroundColor: Colors.brown[100],

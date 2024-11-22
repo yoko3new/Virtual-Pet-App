@@ -47,7 +47,7 @@ class PetQuizzesState extends State<petQuizzes> {
   ];
 
 
-  // multiple-choice questions
+  // Multiple-choice questions
   void answerMultipleChoice(String answer) {
     if (isQuizFinished) return;
 
@@ -60,7 +60,7 @@ class PetQuizzesState extends State<petQuizzes> {
     _nextQuestion();
   }
 
-  // true/false questions
+  // True/false questions
   void answerTrueFalse(bool answer) {
     if (isQuizFinished) return;
 

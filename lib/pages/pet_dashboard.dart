@@ -75,206 +75,266 @@ class _PetDashboardState extends State<petDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.brown[100],
-      body: SafeArea(
-        child: Stack(
-          children: [
-            new Container(
-              decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage('lib/images/bg1.png'), fit: BoxFit.cover),
-              ),
-            ),
-
-            Center(
+      appBar: AppBar(
+        title: Text('Pet Pals'),
+        backgroundColor: Colors.brown[600],
+        actions: [
+          IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.brown),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  const SizedBox(height: 20),
-                  Text(
-                    'Pet Pals',
-                    style: TextStyle(
-                      color: Colors.grey[900],
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 30.0,
+                    backgroundImage: AssetImage('lib/images/profile.jpg'),
                   ),
-
-                  const SizedBox(height: 150),
-
-                  // Mood status bar
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                    child: Column(
-                      children: [
-                        // Mood level label
-                        Text(
-                          'Mood Level: ${moodLevel.toInt()}%',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: moodLevel > 50 ? Colors.green.shade900 : Colors.red.shade900,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-
-                        // Mood progress bar
-                        LinearProgressIndicator(
-                          value: moodLevel / 100,
-                          minHeight: 15,
-                          backgroundColor: Colors.white,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            moodLevel > 50 ? Colors.green : Colors.red,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
-                  ),
-
-                  // Row with buttons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      ElevatedButton(
-                        child: const Text("Feed pet"),
-                        onPressed: () {
-                          setState(() {
-                            isFeeding = true;
-                            isGrooming = false;
-                            isCuddling = false;
-                          });
-                          updateMood(20);
-
-                          // Reset to false after 3 seconds (optional)
-                          Future.delayed(const Duration(seconds: 3), () {
-                            setState(() {
-                              isFeeding = false;
-                            });
-                          });
-                        },
-                      ),
-                      const SizedBox(width: 20),
-                      ElevatedButton(
-                        child: const Text("Groom pet"),
-                        onPressed: () {
-                          setState(() {
-                            isFeeding = false;
-                            isGrooming = true;
-                            isCuddling = false;
-                          });
-                          updateMood(20);
-
-                          // Reset to false after 3 seconds (optional)
-                          Future.delayed(const Duration(seconds: 3), () {
-                            setState(() {
-                              isGrooming = false;
-                            });
-                          });
-                        },
-                      ),
-                      const SizedBox(width: 20),
-                      ElevatedButton(
-                        child: const Text("Cuddle pet"),
-                        onPressed: () {
-                          setState(() {
-                            isFeeding = false;
-                            isGrooming = false;
-                            isCuddling = true;
-                          });
-                          updateMood(20);
-
-
-                          Future.delayed(const Duration(seconds: 3), () {
-                            setState(() {
-                              isCuddling = false;
-                            });
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 50),
-
-
-                  Container(
-                    width: 300,
-                    height: 300,
-                    child: isFeeding
-                        ? Image.asset('lib/images/CatFeeding.png', fit: BoxFit.cover) // Show feeding image
-                        : isGrooming
-                        ? Image.asset('lib/images/CatGrooming.png', fit: BoxFit.cover) // Show grooming image
-                        : isCuddling
-                        ? Image.asset('lib/images/CatCuddles.png', fit: BoxFit.cover) // Show cuddling image
-                        : Image.asset('lib/images/cat.png', fit: BoxFit.cover), // Default cat image
-                  ),
+                  SizedBox(height: 8),
+                  Text('Hello, Jane!', style: TextStyle(color: Colors.white, fontSize: 18)),
                 ],
               ),
             ),
-
-            // Profile pic
-            Positioned(
-              top: 20,
-              right: 20,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, '/profile');
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 2.0,
-                    ),
-                  ),
-                  child: ClipOval(
-                    child: Image.asset(
-                      'lib/images/profile.jpg',
-                      width: 50.0,
-                      height: 50.0,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
+            ListTile(
+              title: Text('Pet Checklist'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/petchecklist');
+              },
+            ),
+            ListTile(
+              title: Text('Milestones'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/milestones');
+              },
+            ),
+            ListTile(
+              title: Text('Quizzes'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/pet_quizzes');
+              },
+            ),
+            ListTile(
+              title: Text('Profile'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/profile');
+              },
+            ),
+            ListTile(
+              title: Text('Support'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/support');
+              },
+            ),
+            Divider(),
+            ListTile(
+              title: Text('Logout'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/loginpage');
+              },
             ),
           ],
         ),
       ),
+      body: SafeArea(
+        child: Stack(
+            children: [
+        new Container(
+        decoration: new BoxDecoration(
+        image: new DecorationImage(image: new AssetImage('lib/images/bg1.png'), fit: BoxFit.cover),
+    ),
+    ),
+        SingleChildScrollView(
+        child: Center(
+        child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    const SizedBox(height: 20),
+                    Text(
+                      'Pet Pals',
+                      style: TextStyle(
+                        color: Colors.grey[900],
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 105),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Mood Level: ${moodLevel.toInt()}%',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: moodLevel > 50 ? Colors.green.shade900 : Colors.red.shade900,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          LinearProgressIndicator(
+                            value: moodLevel / 100,
+                            minHeight: 15,
+                            backgroundColor: Colors.white,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              moodLevel > 50 ? Colors.green : Colors.red,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        ElevatedButton(
+                          child: const Text("Feed pet"),
+                          onPressed: () {
+                            setState(() {
+                              isFeeding = true;
+                              isGrooming = false;
+                              isCuddling = false;
+                            });
+                            updateMood(20);
 
-      // Bottom navigation bar
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(
-            icon: Image.asset('lib/images/checklist.png', height: 30, width: 30),
-            label: 'Checklist',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset('lib/images/milestones.png', height: 30, width: 30),
-            label: 'Milestones',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset('lib/images/quizzes.png', height: 30, width: 30),
-            label: 'Quizzes',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset('lib/images/logout.png', height: 30, width: 30),
-            label: 'Logout',
-          ),
-        ],
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
+                            Future.delayed(const Duration(seconds: 3), () {
+                              setState(() {
+                                isFeeding = false;
+                              });
+                            });
+                          },
+                        ),
+                        const SizedBox(width: 20),
+                        ElevatedButton(
+                          child: const Text("Groom pet"),
+                          onPressed: () {
+                            setState(() {
+                              isFeeding = false;
+                              isGrooming = true;
+                              isCuddling = false;
+                            });
+                            updateMood(20);
 
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        selectedLabelStyle: TextStyle(color: Colors.black),
-        unselectedLabelStyle: TextStyle(color: Colors.black),
-      ),
+                            Future.delayed(const Duration(seconds: 3), () {
+                              setState(() {
+                                isGrooming = false;
+                              });
+                            });
+                          },
+                        ),
+                        const SizedBox(width: 20),
+                        ElevatedButton(
+                          child: const Text("Cuddle pet"),
+                          onPressed: () {
+                            setState(() {
+                              isFeeding = false;
+                              isGrooming = false;
+                              isCuddling = true;
+                            });
+                            updateMood(20);
 
+                            Future.delayed(const Duration(seconds: 3), () {
+                              setState(() {
+                                isCuddling = false;
+                              });
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 50),
+                    Container(
+                      width: 300,
+                      height: 300,
+                      child: isFeeding
+                          ? Image.asset('lib/images/CatFeeding.png', fit: BoxFit.cover)
+                          : isGrooming
+                          ? Image.asset('lib/images/CatGrooming.png', fit: BoxFit.cover)
+                          : isCuddling
+                          ? Image.asset('lib/images/CatCuddles.png', fit: BoxFit.cover)
+                          : Image.asset('lib/images/cat.png', fit: BoxFit.cover),
+                    ),
+                  ],
+                ),
+              ),
+        ),
+
+              Positioned(
+                top: 20,
+                right: 20,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/profile');
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 2.0,
+                      ),
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'lib/images/profile.jpg',
+                        width: 50.0,
+                        height: 50.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          items: [
+            BottomNavigationBarItem(
+              icon: Image.asset('lib/images/checklist.png', height: 30, width: 30),
+              label: 'Checklist',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset('lib/images/milestones.png', height: 30, width: 30),
+              label: 'Milestones',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset('lib/images/quizzes.png', height: 30, width: 30),
+              label: 'Quizzes',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset('lib/images/logout.png', height: 30, width: 30),
+              label: 'Logout',
+            ),
+          ],
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black,
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          selectedLabelStyle: TextStyle(color: Colors.black),
+          unselectedLabelStyle: TextStyle(color: Colors.black),
+        )
     );
+
   }
 }
 
