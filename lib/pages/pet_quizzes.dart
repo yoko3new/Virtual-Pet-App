@@ -91,7 +91,7 @@ class PetQuizzesState extends State<petQuizzes> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cat Quiz'),
-        backgroundColor: Colors.brown[300],
+        backgroundColor: Colors.brown[600],
       ),
       body: isQuizFinished
           ? Center(

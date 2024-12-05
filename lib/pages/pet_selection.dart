@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class petSelection extends StatelessWidget {
   petSelection({super.key});
 
@@ -12,11 +11,7 @@ class petSelection extends StatelessWidget {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            // Center the cards vertically
-
             children: <Widget>[
-
-              // First Card
               Text(
                 'Pet Selection',
                 style: TextStyle(
@@ -25,15 +20,21 @@ class petSelection extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+
+
               const SizedBox(height: 20),
 
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/petdashboard');
-            },
 
-                  child:
-                  Card(
+              // Cat Card
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/petdashboard',
+                    arguments: 'cat',
+                  );
+                },
+                child: Card(
                   elevation: 20,
                   color: Colors.white,
                   child: Column(
@@ -41,34 +42,28 @@ class petSelection extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         'Cat',
-                        style: TextStyle(
-                          fontSize: 24,
-                        ),
+                        style: TextStyle(fontSize: 24),
                       ),
-                      Image.asset('lib/images/cat.png',
-                          height: 150,
-                          width: 150,
-                          fit:BoxFit.fill
-                      ),
+                      Image.asset('lib/images/cat2.png', height: 150, width: 150, fit: BoxFit.fill),
                     ],
                   ),
                 ),
-                ),
-                const SizedBox(height: 20), // Space between cards
+              ),
 
-
-
-              // Second Card
 
               const SizedBox(height: 20),
 
+
+              // Dog Card
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/dogdashboard');
+                  Navigator.pushNamed(
+                    context,
+                    '/petdashboard',
+                    arguments: 'dog',
+                  );
                 },
-
-                child:
-                Card(
+                child: Card(
                   elevation: 20,
                   color: Colors.white,
                   child: Column(
@@ -76,34 +71,28 @@ class petSelection extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         'Dog',
-                        style: TextStyle(
-                          fontSize: 24,
-                        ),
+                        style: TextStyle(fontSize: 24),
                       ),
-                      Image.asset('lib/images/dog.png',
-                          height: 150,
-                          width: 150,
-                          fit:BoxFit.fill
-                      ),
+                      Image.asset('lib/images/dog1.png', height: 150, width: 150, fit: BoxFit.fill),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 20), // Space between cards
 
-
-
-              // Third Card
 
               const SizedBox(height: 20),
 
+
+              // Hamster Card
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/hamsterdashboard');
+                  Navigator.pushNamed(
+                    context,
+                    '/petdashboard',
+                    arguments: 'hamster',
+                  );
                 },
-
-                child:
-                Card(
+                child: Card(
                   elevation: 20,
                   color: Colors.white,
                   child: Column(
@@ -111,25 +100,13 @@ class petSelection extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         'Hamster',
-                        style: TextStyle(
-                          fontSize: 24,
-                        ),
+                        style: TextStyle(fontSize: 24),
                       ),
-                      Image.asset('lib/images/hamster.png',
-                          height: 150,
-                          width: 150,
-                          fit:BoxFit.fill
-                      ),
+                      Image.asset('lib/images/ham1.png', height: 150, width: 150, fit: BoxFit.fill),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 20), // Space between cards
-
-
-
-
-
             ],
           ),
         ),

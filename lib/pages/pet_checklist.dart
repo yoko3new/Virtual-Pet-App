@@ -38,7 +38,7 @@ class PetChecklistState extends State<petChecklist> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown[300],
+        backgroundColor: Colors.brown[600],
       ),
       backgroundColor: Colors.brown[100],
       body: SafeArea(

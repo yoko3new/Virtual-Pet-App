@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'achievements.dart'; // Import the AchievementsPage
 
 class petDashboard extends StatefulWidget {
   const petDashboard({super.key});
@@ -11,34 +12,61 @@ class petDashboard extends StatefulWidget {
 class _PetDashboardState extends State<petDashboard> {
   double moodLevel = 50.0;
   late Timer moodTimer;
+  late Timer notificationTimer;
   int _selectedIndex = 0;
 
-  // Track the actions for each pet activity
+  // Tracking the pet moods
   bool isFeeding = false;
   bool isGrooming = false;
   bool isCuddling = false;
 
-  @override
-  void initState() {
-    super.initState();
-    startMoodDecrease();
-  }
+  String selected_pet_type = '';
+  String selected_pet_image = '';
 
-  // Start the timer to decrease mood every 5 secs
+  // Tracking the progress for achievements
+  bool hasFedPet = false;
+  bool hasGroomedPet = false;
+  bool hasCuddledPet = false;
+
+  // List of pet types
+  Map<String, List<String>> availableImages = {
+    'cat': [
+      'lib/images/cat2.png',
+      'lib/images/cat3.png',
+      'lib/images/cat4.png',
+      'lib/images/cat5.png',
+      'lib/images/cat6.png'
+    ],
+    'dog': [
+      'lib/images/dog1.png',
+      'lib/images/dog2.png',
+      'lib/images/dog3.png',
+      'lib/images/dog4.png',
+      'lib/images/dog5.png',
+      'lib/images/dog6.png'
+    ],
+    'hamster': [
+      'lib/images/ham1.png',
+      'lib/images/ham2.png',
+      'lib/images/ham3.png',
+      'lib/images/ham4.png',
+      'lib/images/ham5.png'
+    ],
+  };
+
+  // Mood bar
   void startMoodDecrease() {
     moodTimer = Timer.periodic(const Duration(seconds: 5), (timer) {
       decreaseMood();
     });
   }
 
-  // Function to decrease mood by 5% every time the timer ticks
   void decreaseMood() {
     setState(() {
       moodLevel = (moodLevel - (moodLevel * 0.05)).clamp(0.0, 100.0);
     });
   }
 
-  // Update mood level when user interacts
   void updateMood(double moodChange) {
     setState(() {
       moodLevel = (moodLevel + moodChange).clamp(0.0, 100.0);
@@ -48,9 +76,11 @@ class _PetDashboardState extends State<petDashboard> {
   @override
   void dispose() {
     moodTimer.cancel();
+    notificationTimer.cancel();
     super.dispose();
   }
 
+  // Bottom nav
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -73,6 +103,51 @@ class _PetDashboardState extends State<petDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final petType = ModalRoute.of(context)!.settings.arguments as String;
+
+    if (petType != selected_pet_type) {
+      setState(() {
+        selected_pet_type = petType;
+        selected_pet_image = availableImages[selected_pet_type]![0];
+      });
+    }
+
+
+    // Pet customization card
+    void selectImage() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Customize your $petType!'),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ...availableImages[selected_pet_type]!.map((image) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selected_pet_image = image;
+                        });
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(8.0),
+                        width: 100,
+                        height: 100,
+                        child: Image.asset(image, fit: BoxFit.cover),
+                      ),
+                    );
+                  }).toList(),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+
+
     return Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
@@ -87,6 +162,9 @@ class _PetDashboardState extends State<petDashboard> {
           ),
         ],
       ),
+
+
+      // Hamburger menu
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -140,6 +218,24 @@ class _PetDashboardState extends State<petDashboard> {
                 Navigator.pushNamed(context, '/support');
               },
             ),
+
+            ListTile(
+              title: Text('Achievements'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => achievementsPage(
+                      hasFedPet: hasFedPet,
+                      hasGroomedPet: hasGroomedPet,
+                      hasCuddledPet: hasCuddledPet,
+                    ),
+                  ),
+                );
+              },
+            ),
+
             Divider(),
             ListTile(
               title: Text('Logout'),
@@ -148,20 +244,24 @@ class _PetDashboardState extends State<petDashboard> {
                 Navigator.pushNamed(context, '/loginpage');
               },
             ),
+
           ],
         ),
       ),
+
+
+      // Pet dashboard screen
       body: SafeArea(
         child: Stack(
-            children: [
-        new Container(
-        decoration: new BoxDecoration(
-        image: new DecorationImage(image: new AssetImage('lib/images/bg1.png'), fit: BoxFit.cover),
-    ),
-    ),
-        SingleChildScrollView(
-        child: Center(
-        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage('lib/images/bg1.png'), fit: BoxFit.cover),
+              ),
+            ),
+            SingleChildScrollView(
+              child: Center(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -199,6 +299,9 @@ class _PetDashboardState extends State<petDashboard> {
                         ],
                       ),
                     ),
+
+
+                    // Pet mood buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -211,6 +314,7 @@ class _PetDashboardState extends State<petDashboard> {
                               isCuddling = false;
                             });
                             updateMood(20);
+                            hasFedPet = true;
 
                             Future.delayed(const Duration(seconds: 3), () {
                               setState(() {
@@ -229,6 +333,7 @@ class _PetDashboardState extends State<petDashboard> {
                               isCuddling = false;
                             });
                             updateMood(20);
+                            hasGroomedPet = true;
 
                             Future.delayed(const Duration(seconds: 3), () {
                               setState(() {
@@ -247,6 +352,7 @@ class _PetDashboardState extends State<petDashboard> {
                               isCuddling = true;
                             });
                             updateMood(20);
+                            hasCuddledPet = true;
 
                             Future.delayed(const Duration(seconds: 3), () {
                               setState(() {
@@ -257,87 +363,79 @@ class _PetDashboardState extends State<petDashboard> {
                         ),
                       ],
                     ),
+
                     const SizedBox(height: 50),
                     Container(
                       width: 300,
                       height: 300,
                       child: isFeeding
-                          ? Image.asset('lib/images/CatFeeding.png', fit: BoxFit.cover)
+                          ? Image.asset('lib/images/isFeeding.png', fit: BoxFit.cover)
                           : isGrooming
-                          ? Image.asset('lib/images/CatGrooming.png', fit: BoxFit.cover)
+                          ? Image.asset('lib/images/isGrooming.png', fit: BoxFit.cover)
                           : isCuddling
-                          ? Image.asset('lib/images/CatCuddles.png', fit: BoxFit.cover)
-                          : Image.asset('lib/images/cat.png', fit: BoxFit.cover),
+                          ? Image.asset('lib/images/isCuddling.png', fit: BoxFit.cover)
+                          : Image.asset(selected_pet_image, fit: BoxFit.cover)
+
+                  ),
+                  ],
+                ),
+              ),
+            ),
+
+
+                    const SizedBox(height: 50),
+
+                    // Allows user to select/tap the pet they want and updating to the home screen
+                    GestureDetector(
+                      onTap: selectImage,
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        child: selected_pet_image.isNotEmpty
+                            ? Image.asset(selected_pet_image, fit: BoxFit.cover)
+                            : const Center(child: Text("Select an image")),
+                      ),
                     ),
                   ],
                 ),
               ),
-        ),
 
-              Positioned(
-                top: 20,
-                right: 20,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/profile');
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                    ),
-                    child: ClipOval(
-                      child: Image.asset(
-                        'lib/images/profile.jpg',
-                        width: 50.0,
-                        height: 50.0,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+
+      // Botton navigation
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: [
+          BottomNavigationBarItem(
+            icon: Image.asset('lib/images/checklist.png', height: 30, width: 30),
+            label: 'Checklist',
           ),
-        ),
-
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          items: [
-            BottomNavigationBarItem(
-              icon: Image.asset('lib/images/checklist.png', height: 30, width: 30),
-              label: 'Checklist',
-            ),
-            BottomNavigationBarItem(
-              icon: Image.asset('lib/images/milestones.png', height: 30, width: 30),
-              label: 'Milestones',
-            ),
-            BottomNavigationBarItem(
-              icon: Image.asset('lib/images/quizzes.png', height: 30, width: 30),
-              label: 'Quizzes',
-            ),
-            BottomNavigationBarItem(
-              icon: Image.asset('lib/images/logout.png', height: 30, width: 30),
-              label: 'Logout',
-            ),
-          ],
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.black,
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          selectedLabelStyle: TextStyle(color: Colors.black),
-          unselectedLabelStyle: TextStyle(color: Colors.black),
-        )
+          BottomNavigationBarItem(
+            icon: Image.asset('lib/images/milestones.png', height: 30, width: 30),
+            label: 'Milestones',
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset('lib/images/quizzes.png', height: 30, width: 30),
+            label: 'Quizzes',
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset('lib/images/logout.png', height: 30, width: 30),
+            label: 'Logout',
+          ),
+        ],
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.black,
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedLabelStyle: TextStyle(color: Colors.black),
+        unselectedLabelStyle: TextStyle(color: Colors.black),
+      ),
     );
-
   }
 }
 
 void main() {
   runApp(MaterialApp(home: petDashboard()));
 }
+

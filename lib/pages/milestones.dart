@@ -7,7 +7,7 @@ class petMilestones extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown[300],
+        backgroundColor: Colors.brown[600],
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {

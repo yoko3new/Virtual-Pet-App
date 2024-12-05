@@ -14,7 +14,7 @@ class SubmitTicketPageState extends State<petSupport> {
 
   bool submitting = false;
 
-  // Function to handle ticket submission
+  // Ticket submission
   void submitTicket() {
     if (formKey.currentState!.validate()) {
       // Network request to submit ticket to the backend
@@ -42,7 +42,7 @@ class SubmitTicketPageState extends State<petSupport> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Submit a Ticket'),
-        backgroundColor: Colors.brown[300],
+        backgroundColor: Colors.brown[600],
 
     ),
       body: Padding(
@@ -54,7 +54,7 @@ class SubmitTicketPageState extends State<petSupport> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Subject TextField
+                  // Subject textField
                   TextFormField(
                     controller: subjectController,
                     decoration: const InputDecoration(
@@ -68,9 +68,10 @@ class SubmitTicketPageState extends State<petSupport> {
                       return null;
                     },
                   ),
+
                   const SizedBox(height: 16),
 
-                  // Description TextField
+                  // Description textField
                   TextFormField(
                     controller: descriptionController,
                     maxLines: 10,
