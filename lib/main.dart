@@ -10,6 +10,9 @@ import 'pages/milestones.dart';
 import 'pages/pet_checklist.dart';
 import 'pages/profile.dart';
 import 'pages/pet_quizzes.dart';
+import 'pages/support.dart';
+import 'pages/achievements.dart';
+
 
 
 
@@ -39,6 +42,11 @@ class MyApp extends StatelessWidget {
         '/petchecklist':(context) =>  petChecklist(),
         '/profile':(context) =>  profilePage(),
         '/pet_quizzes':(context) =>  petQuizzes(),
+        '/support':(context) =>  petSupport(),
+        '/achievements':(context) => achievementsPage(hasFedPet: true, hasGroomedPet: true, hasCuddledPet: true,),
+
+
+
 
 
       }
