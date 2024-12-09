@@ -365,33 +365,20 @@ class _PetDashboardState extends State<petDashboard> {
                     ),
 
                     const SizedBox(height: 50),
-                    Container(
-                      width: 300,
-                      height: 300,
-                      child: isFeeding
-                          ? Image.asset('lib/images/isFeeding.png', fit: BoxFit.cover)
-                          : isGrooming
-                          ? Image.asset('lib/images/isGrooming.png', fit: BoxFit.cover)
-                          : isCuddling
-                          ? Image.asset('lib/images/isCuddling.png', fit: BoxFit.cover)
-                          : Image.asset(selected_pet_image, fit: BoxFit.cover)
 
-                  ),
-                  ],
-                ),
-              ),
-            ),
-
-
-                    const SizedBox(height: 50),
-
-                    // Allows user to select/tap the pet they want and updating to the home screen
+                    //Pet image logic
                     GestureDetector(
                       onTap: selectImage,
                       child: Container(
-                        width: 200,
-                        height: 200,
-                        child: selected_pet_image.isNotEmpty
+                        width: 300,
+                        height: 300,
+                        child: isFeeding
+                            ? Image.asset('lib/images/isFeeding.png', fit: BoxFit.cover)
+                            : isGrooming
+                            ? Image.asset('lib/images/isGrooming.png', fit: BoxFit.cover)
+                            : isCuddling
+                            ? Image.asset('lib/images/isCuddling.png', fit: BoxFit.cover)
+                            : selected_pet_image.isNotEmpty
                             ? Image.asset(selected_pet_image, fit: BoxFit.cover)
                             : const Center(child: Text("Select an image")),
                       ),
@@ -399,9 +386,14 @@ class _PetDashboardState extends State<petDashboard> {
                   ],
                 ),
               ),
+            ),
+
+          ],
+        ),
+      ),
 
 
-      // Botton navigation
+      // Bottom navigation
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
