@@ -4,8 +4,6 @@ import 'pages/registration_page.dart';
 import 'pages/login_page_2.dart';
 import 'pages/pet_selection.dart';
 import 'pages/pet_dashboard.dart';
-import 'pages/pet_dashboard_dog.dart';
-import 'pages/pet_dashboard_hamster.dart';
 import 'pages/milestones.dart';
 import 'pages/pet_checklist.dart';
 import 'pages/profile.dart';
@@ -36,8 +34,6 @@ class MyApp extends StatelessWidget {
         '/login2':(context) =>  LoginPage2(),
         '/petselection':(context) =>  petSelection(),
         '/petdashboard':(context) =>  petDashboard(),
-        '/dogdashboard':(context) =>  petDashboardDog(),
-        '/hamsterdashboard':(context) =>  petDashboardHamster(),
         '/milestones':(context) =>  petMilestones(),
         '/petchecklist':(context) =>  petChecklist(),
         '/profile':(context) =>  profilePage(),
