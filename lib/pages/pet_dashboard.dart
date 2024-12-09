@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'achievements.dart'; // Import the AchievementsPage
+import 'achievements.dart';
 
 class petDashboard extends StatefulWidget {
   const petDashboard({super.key});
@@ -23,6 +23,7 @@ class _PetDashboardState extends State<petDashboard> {
   String selected_pet_type = '';
   String selected_pet_image = '';
 
+  
   // Tracking the progress for achievements
   bool hasFedPet = false;
   bool hasGroomedPet = false;
@@ -93,7 +94,7 @@ class _PetDashboardState extends State<petDashboard> {
         Navigator.pushNamed(context, '/milestones');
         break;
       case 2:
-        Navigator.pushNamed(context, '/pet_quizzes');
+        Navigator.pushNamed(context, '/pet_quizzes', arguments: selected_pet_type);
         break;
       case 3:
         Navigator.pushNamed(context, '/loginpage');
@@ -111,7 +112,6 @@ class _PetDashboardState extends State<petDashboard> {
         selected_pet_image = availableImages[selected_pet_type]![0];
       });
     }
-
 
     // Pet customization card
     void selectImage() {
@@ -147,7 +147,6 @@ class _PetDashboardState extends State<petDashboard> {
       );
     }
 
-
     return Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
@@ -162,7 +161,6 @@ class _PetDashboardState extends State<petDashboard> {
           ),
         ],
       ),
-
 
       // Hamburger menu
       drawer: Drawer(
@@ -218,7 +216,6 @@ class _PetDashboardState extends State<petDashboard> {
                 Navigator.pushNamed(context, '/support');
               },
             ),
-
             ListTile(
               title: Text('Achievements'),
               onTap: () {
@@ -235,7 +232,6 @@ class _PetDashboardState extends State<petDashboard> {
                 );
               },
             ),
-
             Divider(),
             ListTile(
               title: Text('Logout'),
@@ -244,11 +240,9 @@ class _PetDashboardState extends State<petDashboard> {
                 Navigator.pushNamed(context, '/loginpage');
               },
             ),
-
           ],
         ),
       ),
-
 
       // Pet dashboard screen
       body: SafeArea(
@@ -351,7 +345,7 @@ class _PetDashboardState extends State<petDashboard> {
                               isGrooming = false;
                               isCuddling = true;
                             });
-                            updateMood(20);
+                            updateMood(30);
                             hasCuddledPet = true;
 
                             Future.delayed(const Duration(seconds: 3), () {
@@ -363,8 +357,8 @@ class _PetDashboardState extends State<petDashboard> {
                         ),
                       ],
                     ),
-
                     const SizedBox(height: 50),
+
 
                     //Pet image logic
                     GestureDetector(
@@ -387,11 +381,9 @@ class _PetDashboardState extends State<petDashboard> {
                 ),
               ),
             ),
-
           ],
         ),
       ),
-
 
       // Bottom navigation
       bottomNavigationBar: BottomNavigationBar(
@@ -430,4 +422,3 @@ class _PetDashboardState extends State<petDashboard> {
 void main() {
   runApp(MaterialApp(home: petDashboard()));
 }
-

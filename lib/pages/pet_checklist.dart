@@ -14,7 +14,6 @@ class PetChecklistState extends State<petChecklist> {
     'Groom your pet',
     'Play with your pet',
     'Complete a learning quiz',
-    'Play a mini game',
   ];
 
   late List<bool> tasks;
