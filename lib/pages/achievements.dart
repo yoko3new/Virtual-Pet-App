@@ -22,14 +22,14 @@ class achievementsPage extends StatelessWidget {
         isAchieved: hasFedPet,
       ),
       Achievement(
-        title: "Groomed Pet 5 Times",
-        description: "Groom your pet 5 times.",
+        title: "Groom Pet!",
+        description: "Groom your pet",
         icon: Icons.cleaning_services,
         isAchieved: hasGroomedPet,
       ),
       Achievement(
         title: "Cuddles!",
-        description: "Cuddle with your pet 5 times.",
+        description: "Cuddle with your pet",
         icon: Icons.favorite,
         isAchieved: hasCuddledPet,
       ),
